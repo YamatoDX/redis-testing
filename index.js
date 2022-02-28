@@ -17,7 +17,7 @@ app.get("/users", async (req, res) => {
         "https://jsonplaceholder.typicode.com/users"
       );
       const axiosData = response.data;
-      await redisClient.setEx("responseData", 10, JSON.stringify(axiosData));
+      await redisClient.setEx("responseData", 60, JSON.stringify(axiosData));
       return res.status(200).json({
         data: axiosData,
         error: "",
