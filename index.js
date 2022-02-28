@@ -8,7 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const redisClient = Redis.createClient({
-  url: "redis://localhost:4000",
+  url: "redis://127.0.0.1:4000",
 });
 
 app.get("/users", async (req, res) => {
