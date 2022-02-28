@@ -8,9 +8,7 @@ app.use(cors());
 app.use(express.json());
 
 const redisClient = Redis.createClient({
-  host: "redis-server",
-  port: "6379",
-  legacyMode: true,
+  url: "redis://127.0.0.1:8080",
 });
 
 app.get("/users", async (req, res) => {
@@ -43,6 +41,7 @@ app.get("/users", async (req, res) => {
 });
 
 app.listen(4000, async () => {
-  console.log("listening to PORT 4000");
   await redisClient.connect();
+  console.log("redis connected");
+  console.log("listening to PORT 4000");
 });
