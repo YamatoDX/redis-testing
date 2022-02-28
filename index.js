@@ -38,14 +38,12 @@ app.get("/users", async (req, res) => {
   }
 });
 
-app.listen(4000, () => {
-  redisClient
-    .connect()
-    .then(() => {
-      console.log("listening to PORT 4000");
-    })
-    .catch((err) => {
-      console.error(err);
-      console.error("there was an error while listening");
-    });
+app.listen(4000, async () => {
+  try {
+    await redisClient.connect();
+    console.log("listening to PORT 4000");
+  } catch (err) {
+    console.error(err);
+    console.error("there was an error while listening to PORT 4000");
+  }
 });
