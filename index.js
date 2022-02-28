@@ -1,13 +1,14 @@
 const express = require("express");
 const cors = require("cors");
-const Redis = require("redis");
 const axios = require("axios");
+const Redis = require("redis");
+const { createClient } = Redis;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const redisClient = Redis.createClient({
+const redisClient = createClient({
   url: "redis://127.0.0.1:6379",
 });
 
