@@ -2,14 +2,15 @@ const express = require("express");
 const cors = require("cors");
 const axios = require("axios");
 const Redis = require("redis");
-const { createClient } = Redis;
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
-const redisClient = createClient({
-  url: "redis://127.0.0.1:6379",
+const redisClient = Redis.createClient({
+  host: "redis-server",
+  port: "6379",
+  legacyMode: true,
 });
 
 app.get("/users", async (req, res) => {
@@ -42,11 +43,6 @@ app.get("/users", async (req, res) => {
 });
 
 app.listen(4000, async () => {
-  try {
-    await redisClient.connect();
-    console.log("listening to PORT 4000");
-  } catch (err) {
-    console.error(err);
-    console.error("there was an error while listening to PORT 4000");
-  }
+  console.log("listening to PORT 4000");
+  await redisClient.connect();
 });
