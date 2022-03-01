@@ -8,8 +8,10 @@ app.use(cors());
 app.use(express.json());
 
 const redisClient = Redis.createClient({
-  url: "redis://127.0.0.1:8080",
+  url:"redis://127.0.0.1:6379"
 });
+
+// works when redis server is running on a docker container
 
 app.get("/users", async (req, res) => {
   try {
